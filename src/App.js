@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/Home_page';
 import MyPlanPage from './Pages/MyPlan_page';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
