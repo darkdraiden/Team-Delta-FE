@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,700&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;  /* the padding and border are included in the calculation */
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --PrimaryColor: hsl(199, 100%, 33%);
+  --SecondaryColor: hsl(187, 85%, 43%);
+  --gradientColor: linear-gradient(to right, hsl(85, 43%, 50%), hsl(199, 100%, 33%));
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(201, 33%, 16%);
+  --textColor: hsl(240, 4%, 36%);
+  --whiteColorDeam: hsl(0 , 0% ,93);
+  --greyText: rgb(0, 0%, 93%);
+  --inputColor: rgb(190, 190, 190);
+  --bodyColor: rgb(240, 240, 246);
+   --cardBG: rgb(225, 225, 235);
+}
+
+a{
+  text-decoration: none;
+}
+
+li{
+  list-style: none;
+}
+
+.section
+{
+  padding: 4rem 0 2 rem;
+}
+
+.container
+{
+  padding-left: 1.5rem;
+  padding-right: 1.5 rem;
+}
+
+.icon{
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.flex
+{
+  display: flex;
+  align-items: center;
+  
+  
+  
+}
+
+.grid{
+  display: grid;
+  align-items: center;
+}
+
+.btn
+{
+  padding: .6rem 1.5rem;
+  background: var(--gradientColor);
+  border-radius: 3rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn:hover{
+  background: var(--SecondaryColor);
+}
+
+.btn a{
+  color: var(--whiteColor);
+  font-weight: 500;
+
+}
+
+body{
+  background: var(--bodyColor);
+}
+
+
+.space-between {
+  justify-content: space-between;
+}
+/* CSS */
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Custom styles */
+.navBarSection {
+  background-color: var(--bodyColor); /* Use your variable or color code */
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.logo {
+  color: var(--PrimaryColor); /* Use your variable or color code */
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navItem {
+  margin-right: 1rem; /* Adjust as needed */
+}
+
+.navLink {
+  text-decoration: none;
+  color: var(--textColor); /* Use your variable or color code */
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.btn {
+  background-color: var(--gradientColor); /* Use your variable or color code */
+  color: var(--whiteColor); /* Use your variable or color code */
+  border: none;
+  padding: 0.5rem 1re
+}
+
+.navBarSection
+{
+  background-color: gray;
+  padding: 0rem;
+  margin: 00rem;
+}

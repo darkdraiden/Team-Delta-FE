@@ -1,12 +1,42 @@
-import React from 'react'
-import DefaultLayoutHoc from '../layout/Default.layout'
+import React from "react";
+import DefaultLayoutHoc from "../layout/Default.layout";
+import HeroCarousel from "../components/HeroCarousel/HeroCarousel";
+import Containers from "../components/Conatiners/Containers";
+//import axios from "axios";
 
 const HomePage = () => {
-  return (
-    <div>
-      hpme page
-    </div>
-  )
-}
 
-export default DefaultLayoutHoc(HomePage)
+  /* const [cardData, setcardData] = useState([]);
+
+ useEffect(() => {
+    const requestcardData = async () => {
+      const getcardData = await axios.get("");
+      setcardData(getcardData.data.results);
+    };
+
+    requestcardData();
+  }, []);
+  */
+
+  return (
+    <>
+      <HeroCarousel />
+      <div className="container mx-auto px-4 md:px-12 my-8">
+        <h1 className="text-4xl font-bold text-gray-800 sm:ml-3 ml-0 my-3 text-center">
+          Explore Travel Plans
+        </h1>
+        <Containers/>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-12 my-8"></div>
+
+      <div className="bg-premier-800 py-12">
+        <div className="container mx-auto px-4 md:px-12 my-8 flex flex-col gap-3">
+          <div className="hidden md:flex"></div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default DefaultLayoutHoc(HomePage);
