@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BiChevronDown, BiSearch } from "react-icons/bi";
 //import { Link } from "react-router-dom";
-import { SiYourtraveldottv } from "react-icons/si";
+import { RiAdminFill } from "react-icons/ri";
 
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import axios from "axios";
@@ -263,31 +263,26 @@ function NavLg() {
       <div className="container flex mx-2 px-1 items-center justify-between">
         <div className="flex items-center ">
           <div className="logoDiv flex items-center">
-            <a href="#" className="logoFlex flex items-center text-white ">
-              <SiYourtraveldottv className="text-4xl mr-2 font-bold" />
-              <h1 className="text-3xl font-bold text-white">Travel</h1>
+            <a href="/admin" className="logoFlex flex items-center text-white ">
+              <RiAdminFill className="text-4xl mr-2 font-bold" />
+              <h1 className="text-3xl font-bold text-white">Admin DashBoard</h1>
             </a>
           </div>
         </div>
         <div className="flex items-center space-x-5 ">
           <ul className="navList flex  space-x-5 space-between text-xl font-medium">
             <li className="navItem">
-              <a href="/" className="navLink text-white">
-                Home
+              <a href="/admin" className="navLink text-white">
+                Posted Plans
               </a>
             </li>
 
             <li className="navItem">
-              <a href="my_plans" className="navLink text-white">
-                My Plans
+              <a href="admin/AdminPlan" className="navLink text-white">
+                Add New Plans
               </a>
             </li>
 
-            <li className="navItem">
-              <a href="#" className="navLink text-white">
-                Reviews
-              </a>
-            </li>
           </ul>
         </div>
         <div className="flex ">
@@ -315,7 +310,7 @@ function NavLg() {
 }
 
 // Main Component
-const Navbar = () => {
+const AdminNavbar = () => {
   return (
     <nav className="bg-darkBackground-700 px-4 py-3">
       {/* Mobile Screen NavBar */}
@@ -334,4 +329,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AdminNavbar;

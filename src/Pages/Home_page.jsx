@@ -28,13 +28,11 @@ const HomePage = () => {
         <Containers/>
       </div>
 
-      <div className="container mx-auto px-4 md:px-12 my-8"></div>
+      
 
-      <div className="bg-premier-800 py-12">
-        <div className="container mx-auto px-4 md:px-12 my-8 flex flex-col gap-3">
           <div className="hidden md:flex"></div>
-        </div>
-      </div>
+        
+      
     </>
   );
 };
