@@ -1,5 +1,5 @@
 import React from "react";
-import PlanInfo from './PlanInfo';
+import PlanInfo from "./PlanInfo";
 // import { MovieContext } from "../../context/Movie.context";
 
 

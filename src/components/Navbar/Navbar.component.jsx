@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { BiChevronDown, BiSearch } from "react-icons/bi";
 //import { Link } from "react-router-dom";
 import { SiYourtraveldottv } from "react-icons/si";
-
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import axios from "axios";
+import { MDBInput } from "mdb-react-ui-kit";
 
 function NavSm() {
   return (
@@ -47,10 +47,18 @@ function NavMd() {
 function NavLg() {
   const [modal, setmodal] = useState(false);
   const [modal2, setmodal2] = useState(false);
+  const[success , gotSuccess]= useState("")
+const[error , getError] = useState("")
+
   const [user, setuser] = useState({
     name: "",
     email: "",
     phonenumber: "",
+    password: "",
+  });
+
+  const [usr, setusr] = useState({
+    email: "",
     password: "",
   });
 
@@ -61,7 +69,13 @@ function NavLg() {
     setuser({ ...user, [name]: value });
   };
 
-  function signInDetails(e) {
+  const handleInputLogin = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    setusr({ ...usr, [name]: value });
+  };
+
+  function signUpDetails(e) {
     e.preventDefault();
     axios
       .post("http://127.0.0.1:8000/signup/", {
@@ -70,10 +84,22 @@ function NavLg() {
         phonenumber: user.phonenumber,
         password: user.password,
       })
-      .then((req) => console.log(req.data))
+      .then((req) => {gotSuccess("User Created Successfuly") ;getError("") ; openModal2()})
+      .catch((err) => {getError(err.message) ;gotSuccess("")});
+  }
+
+  function signInDetails(e) {
+    e.preventDefault();
+    axios
+      .post("http://127.0.0.1:8000/signin/", { 
+        email: usr.email,
+        password: usr.password,
+      })
+      .then((req) => alert("logged in"))
       .catch((err) => console.log(err.message));
   }
 
+  
   const openModal1 = () => {
     setmodal(true);
     setmodal2(false);
@@ -83,112 +109,46 @@ function NavLg() {
     setmodal2(true);
     setmodal(false);
   };
-
+ 
   return (
     <>
       <Modal size="md" isOpen={modal} toggle={() => setmodal(!modal)}>
         <ModalHeader toggle={() => setmodal(!modal)}>Sign Up</ModalHeader>
+        
+      {error !== "" && (
+        <center>
+          <div className="w-80 m-2 alert alert-danger" role="alert">
+            {error}
+          </div>
+        </center>
+      )}
         <ModalBody>
           <form>
             <div className="modal-body mx-3">
-              <div className="md-form mb-2">
-                <i className="fas fa-user prefix grey-text"></i>
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-name"
-                >
-                  Your name
-                </label>
-                <input
-                  type="text"
-                  onChange={handleInput}
-                  id="orangeForm-name"
-                  className="form-control validate"
-                  name="name"
-                />
-              </div>
-              <div className="md-form mb-2">
-                <i className="fas fa-envelope prefix grey-text"></i>
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-email"
-                >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  onChange={handleInput}
-                  id="orangeForm-email"
-                  className="form-control validate"
-                  name="email"
-                />
-              </div>
-
-              <div className="md-form mb-2">
-                <i className="fas fa-envelope prefix grey-text"></i>
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-email"
-                >
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  onChange={handleInput}
-                  id="orangeForm-phone"
-                  className="form-control validate"
-                  name="phonenumber"
-                />
-              </div>
-
-              <div className="md-form mb-2">
-                <i className="fas fa-lock prefix grey-text"></i>
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-pass"
-                >
-                  Your password
-                </label>
-                <input
-                  type="password"
-                  onChange={handleInput}
-                  id="orangeForm-pass"
-                  className="form-control validate"
-                  name="password"
-                />
-              </div>
-
-              <div className="md-form mb-2">
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-pass"
-                >
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  id="orangeForm-cpass"
-                  className="form-control validate"
-                  name="confirm_password"
-                />
-              </div>
+              <div className="md-form mb-1">
+            <MDBInput label='Your Name' id='typeText'  name="name" onChange={handleInput} type='text' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
+            <br/>
+            <MDBInput label='Your email' id='typeemail'  name="email" onChange={handleInput} type='email' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
+            <br/>
+            <MDBInput label='Phone Number' id='typephone'  name="phonenumber" onChange={handleInput} type='tel' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
+            <br/>
+            <MDBInput label='Password' id='typepass'  name="password" onChange={handleInput} type='password' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
+           <br/>
+           <MDBInput label='Confirm Password' id='typecpassword'  name="confirm_password" onChange={handleInput} type='password' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
+              </div>    
             </div>
 
             <div>
               <div className="modal-footer d-flex justify-content-center">
                 <button
                   type="button"
-                  onClick={signInDetails}
+                  onClick={signUpDetails}
                   className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-6 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                 >
                   Sign Up
                 </button>
               </div>
+            
               already have an account
               <button
                 type="button"
@@ -205,37 +165,23 @@ function NavLg() {
       <Modal size="md" isOpen={modal2} toggle={() => setmodal2(!modal2)}>
         <ModalHeader toggle={() => setmodal2(!modal2)}>Sign In</ModalHeader>
         <ModalBody>
+        {success !== "" && (
+        <center>
+          <div className="alert alert-warning alert-dismissible fade show" role="alert">
+            {success}
+             {/* <button onClick={gotSuccess("")}  type="button" className="close" data-dismiss="alert" aria-label="Close" >
+             <span aria-hidden="true">&times;</span>
+         </button> */}
+          </div>
+        </center>
+      )}
+      
           <div className="modal-body mx-3">
             <div className="md-form mb-2">
-              <i className="fas fa-envelope prefix grey-text"></i>
-              <label
-                data-error="wrong"
-                data-success="right"
-                htmlFor="orangeForm-email"
-              >
-                Your email
-              </label>
-              <input
-                type="email"
-                id="orangeForm-email"
-                className="form-control validate"
-              />
-            </div>
-
-            <div className="md-form mb-2">
-              <i className="fas fa-lock prefix grey-text"></i>
-              <label
-                data-error="wrong"
-                data-success="right"
-                htmlFor="orangeForm-pass"
-              >
-                Your password
-              </label>
-              <input
-                type="password"
-                id="orangeForm-pass"
-                className="form-control validate"
-              />
+            <MDBInput label='Enter email' id='signintypeText'  name="email" onChange={handleInputLogin} type='email' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
+            <br/>
+            <MDBInput label='Password' id='signintypeText'  name="password" onChange={handleInputLogin} type='password' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
+            
             </div>
           </div>
           <div>
@@ -263,7 +209,7 @@ function NavLg() {
       <div className="container flex mx-2 px-1 items-center justify-between">
         <div className="flex items-center ">
           <div className="logoDiv flex items-center">
-            <a href="#" className="logoFlex flex items-center text-white ">
+            <a href="/" className="logoFlex flex items-center text-white ">
               <SiYourtraveldottv className="text-4xl mr-2 font-bold" />
               <h1 className="text-3xl font-bold text-white">Travel</h1>
             </a>
@@ -278,14 +224,14 @@ function NavLg() {
             </li>
 
             <li className="navItem">
-              <a href="my_plans" className="navLink text-white">
+              <a href="/my_plans" className="navLink text-white">
                 My Plans
               </a>
             </li>
 
             <li className="navItem">
-              <a href="#" className="navLink text-white">
-                Reviews
+              <a href="/" className="navLink text-white">
+                About Us
               </a>
             </li>
           </ul>

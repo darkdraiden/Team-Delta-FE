@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import HeroSlider from "react-slick";
 import { NextArrow, PrevArrow } from "./Arrows.Component";
 
@@ -14,7 +14,6 @@ const HeroCarousel = () => {
     arrows: true,
     slidesToShow: 1,
     infinite: true,
-    speed: 500,
     slideToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -50,10 +49,10 @@ const HeroCarousel = () => {
         </HeroSlider>
       </div>
       <div className="hidden lg:block ">
-      <div className="w-full h-27"> {/* Adjust the height value as needed */}
+      
           <HeroSlider {...settingsLG}>
             {images.map((image, index) => (
-              <div className="w-full h-96 px-0 py-0" key={index}>
+              <div className="w-full h-96 px-0 py-0 mb-0" key={index}>
                 <img
                   src={image}
                   alt="Hero Banner"
@@ -64,7 +63,7 @@ const HeroCarousel = () => {
           ))}
         </HeroSlider>
         </div>
-      </div>
+     
     </>
   );
 };

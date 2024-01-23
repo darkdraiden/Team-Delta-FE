@@ -17,9 +17,9 @@ const PlanInfo = ({planData}) => {
         <div className="flex  flex-col gap-2 text-white">
           <h5>{planData.location}</h5>
           
-          <h4>
+          <h6>
             {planData.start_date}
-          </h4>
+          </h6>
         </div>
         <div className="flex items-center gap-3 w-full">
           <button

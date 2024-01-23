@@ -1,6 +1,6 @@
 import React from "react";
 import DefaultLayoutHoc from "../layout/Default.layout";
-import HeroCarousel from "../components/HeroCarousel/HeroCarousel";
+
 import Containers from "../components/Conatiners/Containers";
 //import axios from "axios";
 
@@ -20,6 +20,9 @@ const MyPlanPage = () => {
 
   return (
     <>
+    <div className="mx-5 my-5">
+    <Containers/>
+    </div>
       </>
   );
 };

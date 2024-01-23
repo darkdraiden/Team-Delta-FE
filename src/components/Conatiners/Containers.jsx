@@ -14,7 +14,7 @@ function Containers() {
 
   const routeChange = (idx , plan) => {
     console.log('Navigating to:', `/my_plan/${idx}`);
-    navigate(`/my_plan/${idx}`, { state: { plan: plan} });
+    navigate(`/my_plan/${idx}` , { state: { plan: plan} });
   };
 
   
@@ -53,7 +53,7 @@ function Containers() {
                   src={`https://source.unsplash.com/1600x600/?${plan.title}`}
                   style={{ height: '220px', width: '430px' }}
                 />
-                <a href="#!">
+                <a href="/">
                   <div
                     className="mask"
                     style={{ backgroundColor: 'transparent' }}

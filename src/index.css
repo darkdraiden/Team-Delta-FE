@@ -15,3 +15,8 @@ body {
   right: 3% !important;
   z-index: 1;
 }
+
+.color-dark {
+  background-color: darkblue ;
+  color:black ;
+};

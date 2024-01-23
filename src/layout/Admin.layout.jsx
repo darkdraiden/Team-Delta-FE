@@ -8,7 +8,6 @@ const AdminLayoutHoc =
       <div>
         <AdminNavbar />
         <Component {...props} />
-        <div>Footer</div>
       </div>
     );
   }

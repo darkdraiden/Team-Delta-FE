@@ -21,11 +21,14 @@ const HomePage = () => {
   return (
     <>
       <HeroCarousel />
-      <div className="container mx-auto px-4 md:px-12 my-8">
-        <h1 className="text-4xl font-bold text-gray-800 sm:ml-3 ml-0 my-3 text-center">
+      <div className=" p-2 ">
+        <h1 className="text-4xl font-bold text-gray-800 sm:ml-3 ml-0 my-3 text-center mb-3">
           Explore Travel Plans
         </h1>
+       
+        <div className="container mx-auto px-4 md:px-12 my-8">
         <Containers/>
+        </div>
       </div>
 
       

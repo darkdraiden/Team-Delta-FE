@@ -1,264 +1,105 @@
 import React, { useState } from "react";
-import { BiChevronDown, BiSearch } from "react-icons/bi";
-//import { Link } from "react-router-dom";
 import { RiAdminFill } from "react-icons/ri";
 
-import { Modal, ModalBody, ModalHeader } from "reactstrap";
+import { Modal, ModalBody } from "reactstrap";
 import axios from "axios";
+import { MDBInput, MDBTextArea } from "mdb-react-ui-kit";
 
-function NavSm() {
-  return (
-    <>
-      <div className="text-white flex items-center justify-between">
-        <div>
-          <h3 className="text-xl font-bold">It All Starts Here!</h3>
-          <span className="text-gray-400 text-xs flex items-center cursor-pointer hover:text-white">
-            Delhi NCR <BiChevronDown />
-          </span>
-        </div>
-        <div className="w-8 h-8">
-          <BiSearch className="w-full h-full" />
-        </div>
-      </div>
-    </>
-  );
-}
 
-function NavMd() {
-  return (
-    <>
-      <div className="flex items-center w-full gap-3">
-        <div className="w-10 h-10">
-         
-        </div>
-        <div className="w-full flex items-center gap-3 bg-white px-3 py-1 rounded-md">
-          <BiSearch />
-          <input
-            type="search"
-            className="w-full bg-transparent border-none focus:outline-none"
-            placeholder="Search for movies, events, plays, sports and activities"
-          />
-        </div>
-      </div>
-    </>
-  );
-}
 
-function NavLg() {
+
+
+const AdminNavbar = ({ onAddPlan }) => {
   const [modal, setmodal] = useState(false);
-  const [modal2, setmodal2] = useState(false);
-  const [user, setuser] = useState({
-    name: "",
-    email: "",
-    phonenumber: "",
-    password: "",
+  
+  const [AddPlan, setAddPlan] = useState({
+    title: "",
+    location: "",
+    start_date: "",
+    about: "",
+    rate:"",
   });
 
   let name, value;
   const handleInput = (e) => {
     name = e.target.name;
     value = e.target.value;
-    setuser({ ...user, [name]: value });
+    setAddPlan({ ...AddPlan, [name]: value  });
   };
-
-  function signInDetails(e) {
-    e.preventDefault();
-    axios
-      .post("http://127.0.0.1:8000/signup/", {
-        name: user.name,
-        email: user.email,
-        phonenumber: user.phonenumber,
-        password: user.password,
-      })
-      .then((req) => console.log(req.data))
-      .catch((err) => console.log(err.message));
-  }
 
   const openModal1 = () => {
     setmodal(true);
-    setmodal2(false);
   };
 
-  const openModal2 = () => {
-    setmodal2(true);
+  const closemodal1 = () => {
+    alert("Successfully added");
     setmodal(false);
+    window.location.reload();
+    // Clear the form data or reset the form
+    setAddPlan({
+      title: "",
+      location: "",
+      start_date: "",
+      about: "",
+      rate: "",
+    });
   };
 
+
+  function AddPlanDetails(e) {
+    e.preventDefault();
+    axios
+      .post("http://127.0.0.1:8000/settravelplan/", {
+        location:AddPlan.location,
+        title:AddPlan.title,
+        start_date:AddPlan.start_date,
+        about:AddPlan.about,
+        rate:AddPlan.rate,
+      })
+      .then((req) => {console.log(req.data) ; closemodal1()} )
+      .catch((err) => console.log(err.message));
+  }
   return (
     <>
-      <Modal size="md" isOpen={modal} toggle={() => setmodal(!modal)}>
-        <ModalHeader toggle={() => setmodal(!modal)}>Sign Up</ModalHeader>
-        <ModalBody>
+     <nav className="bg-darkBackground-700 px-4 py-3">
+      <Modal  className="color-dark"size="md" isOpen={modal} toggle={() => setmodal(!modal)}>
+        
+        <ModalBody toggle={() => setmodal(!modal)}>
           <form>
+            <h3> Add New Plan</h3>
             <div className="modal-body mx-3">
-              <div className="md-form mb-2">
-                <i className="fas fa-user prefix grey-text"></i>
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-name"
-                >
-                  Your name
-                </label>
-                <input
-                  type="text"
-                  onChange={handleInput}
-                  id="orangeForm-name"
-                  className="form-control validate"
-                  name="name"
-                />
-              </div>
-              <div className="md-form mb-2">
-                <i className="fas fa-envelope prefix grey-text"></i>
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-email"
-                >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  onChange={handleInput}
-                  id="orangeForm-email"
-                  className="form-control validate"
-                  name="email"
-                />
-              </div>
-
-              <div className="md-form mb-2">
-                <i className="fas fa-envelope prefix grey-text"></i>
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-email"
-                >
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  onChange={handleInput}
-                  id="orangeForm-phone"
-                  className="form-control validate"
-                  name="phonenumber"
-                />
-              </div>
-
-              <div className="md-form mb-2">
-                <i className="fas fa-lock prefix grey-text"></i>
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-pass"
-                >
-                  Your password
-                </label>
-                <input
-                  type="password"
-                  onChange={handleInput}
-                  id="orangeForm-pass"
-                  className="form-control validate"
-                  name="password"
-                />
-              </div>
-
-              <div className="md-form mb-2">
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-pass"
-                >
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  id="orangeForm-cpass"
-                  className="form-control validate"
-                  name="confirm_password"
-                />
-              </div>
+            <MDBInput label='Destination' id='typeText' onChange={handleInput} name='title' type='text' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}} />
+            <br/>
+            <MDBInput label='location' id='typeText' onChange={handleInput} name='location' type='text' size='lg' />
+            <br/>
+            <MDBInput  label='Places NearBy' id='typeText' onChange={handleInput} name='places_nearby' type='text' size='lg' />
+            <br/>
+            <div className="flex space-between gap-3">
+            <MDBInput  label='Price' id='typeNumber' onChange={handleInput} name='rate' type='number' />
+            <MDBInput  label='date' id='typeNumber' onChange={handleInput} name='start_date'type='date' />
+            </div>
+            <br/>
+            <MDBTextArea label='about' id='textAreaExample' name='about' onChange={handleInput} rows={4} />
             </div>
 
             <div>
               <div className="modal-footer d-flex justify-content-center">
                 <button
                   type="button"
-                  onClick={signInDetails}
+                  onClick={AddPlanDetails}
                   className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-6 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                 >
-                  Sign Up
+                  Add
                 </button>
               </div>
-              already have an account
-              <button
-                type="button"
-                onClick={openModal2}
-                className="text-black underline focus:outline-none   font-medium  text-sm px-6 py-2.5 text-center me-2 mb-2 "
-              >
-                sign In
-              </button>
+            
+              
             </div>
           </form>
         </ModalBody>
       </Modal>
 
-      <Modal size="md" isOpen={modal2} toggle={() => setmodal2(!modal2)}>
-        <ModalHeader toggle={() => setmodal2(!modal2)}>Sign In</ModalHeader>
-        <ModalBody>
-          <div className="modal-body mx-3">
-            <div className="md-form mb-2">
-              <i className="fas fa-envelope prefix grey-text"></i>
-              <label
-                data-error="wrong"
-                data-success="right"
-                htmlFor="orangeForm-email"
-              >
-                Your email
-              </label>
-              <input
-                type="email"
-                id="orangeForm-email"
-                className="form-control validate"
-              />
-            </div>
-
-            <div className="md-form mb-2">
-              <i className="fas fa-lock prefix grey-text"></i>
-              <label
-                data-error="wrong"
-                data-success="right"
-                htmlFor="orangeForm-pass"
-              >
-                Your password
-              </label>
-              <input
-                type="password"
-                id="orangeForm-pass"
-                className="form-control validate"
-              />
-            </div>
-          </div>
-          <div>
-            <div className="modal-footer d-flex justify-content-center">
-              <button
-                type="button"
-                onClick={signInDetails}
-                className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-6 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-              >
-                Sign In
-              </button>
-            </div>
-            Don't have an account
-            <button
-              type="button"
-              onClick={openModal1}
-              className="text-black underline focus:outline-none mu-1  font-medium  text-sm px-6 py-2.5 text-center me-2 mb-2 "
-            >
-              Sign Up
-            </button>
-          </div>
-        </ModalBody>
-      </Modal>
+      
 
       <div className="container flex mx-2 px-1 items-center justify-between">
         <div className="flex items-center ">
@@ -270,63 +111,27 @@ function NavLg() {
           </div>
         </div>
         <div className="flex items-center space-x-5 ">
-          <ul className="navList flex  space-x-5 space-between text-xl font-medium">
-            <li className="navItem">
-              <a href="/admin" className="navLink text-white">
-                Posted Plans
-              </a>
-            </li>
-
-            <li className="navItem">
-              <a href="admin/AdminPlan" className="navLink text-white">
-                Add New Plans
-              </a>
-            </li>
-
-          </ul>
+          
         </div>
         <div className="flex ">
           <div className="text-center"></div>
 
-          <button
-            type="button"
-            onClick={openModal2}
-            className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-6 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-          >
-            Sign In
-          </button>
+          
 
           <button
             type="button"
             onClick={openModal1}
             className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-6 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
           >
-            Sign Up
+            Add New PLan
           </button>
         </div>
       </div>
+      </nav>
     </>
   );
 }
 
-// Main Component
-const AdminNavbar = () => {
-  return (
-    <nav className="bg-darkBackground-700 px-4 py-3">
-      {/* Mobile Screen NavBar */}
-      <div className="md:hidden">
-        <NavSm />
-      </div>
-      {/* Medium/Tab Screen NavBar */}
-      <div className="hidden md:flex lg:hidden">
-        <NavMd />
-      </div>
-      {/* Large Screen NavBar */}
-      <div className="hidden md:hidden lg:flex">
-        <NavLg />
-      </div>
-    </nav>
-  );
-};
+
 
 export default AdminNavbar;
