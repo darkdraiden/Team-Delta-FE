@@ -4,7 +4,8 @@ import { MDBRipple } from "mdb-react-ui-kit";
 import AdminLayoutHoc from "../layout/Admin.layout";
 import axios from "axios";
 import { IoLocationOutline } from "react-icons/io5";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { MDBInput, MDBTextArea } from "mdb-react-ui-kit";
 
@@ -18,6 +19,12 @@ const TravelPlansAdmin = () => {
     about: "",
     rate:"",
   });
+
+  const handleReloadWithDelay = () => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  };
 
   let name, value;
   const handleInput = (e) => {
@@ -47,19 +54,18 @@ const TravelPlansAdmin = () => {
   
 
   const handleDeletePlan = (id, title) => {
-    const confirmDelete = window.confirm(
-      `Are you sure you want to delete the plan "${title}"?`
-    );
+    
 
-    if (confirmDelete) {
+    
       axios
         .delete(`http://127.0.0.1:8000/deletetravelplan/${id}`)
         .then((res) => {
-          alert(`${title} deleted`);
-          window.location.reload();
+         
+          toast.success(`Travel Plan ${title} deleted`);
+          handleReloadWithDelay();
         })
         .catch((err) => console.log(err.message));
-    }
+    
   };
 
 
@@ -74,9 +80,9 @@ const TravelPlansAdmin = () => {
       rate: editingPlan.rate,
     })
     .then((res) => {
-      alert(`Edited successfully`);
+        toast.success("Plan Edited Successfully!");
       setShowEditModal(false);
-      window.location.reload();
+      handleReloadWithDelay();
     })
     .catch((err) => console.log(err.message));
 };
@@ -212,6 +218,19 @@ const TravelPlansAdmin = () => {
           </form>
         </ModalBody>
       </Modal>
+      <ToastContainer
+position="top-center"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+
+/>
     </div>
   );
 };

@@ -5,6 +5,10 @@ import { SiYourtraveldottv } from "react-icons/si";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import axios from "axios";
 import { MDBInput } from "mdb-react-ui-kit";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 function NavSm() {
   return (
@@ -27,8 +31,7 @@ function NavSm() {
 function NavLg() {
   const [modal, setmodal] = useState(false);
   const [modal2, setmodal2] = useState(false);
-  const [success, gotSuccess] = useState("");
-  const [error, getError] = useState("");
+  
 
   const [user, setuser] = useState({
     name: "",
@@ -65,13 +68,12 @@ function NavLg() {
         password: user.password,
       })
       .then((req) => {
-        gotSuccess("User Created Successfuly");
-        getError("");
+        toast.success("User Created Successfully!");
         openModal2();
       })
       .catch((err) => {
-        getError(err.message);
-        gotSuccess("");
+        toast.error(err.message)
+        
       });
   }
 
@@ -82,7 +84,7 @@ function NavLg() {
         email: usr.email,
         password: usr.password,
       })
-      .then((req) =>{ alert("logged in") ; setmodal2(false) })
+      .then((req) =>{  toast.success("Logged In Successfully!"); setmodal2(false) })
       .catch((err) => console.log(err.response.data));
   }
 
@@ -101,13 +103,7 @@ function NavLg() {
       <Modal size="md" isOpen={modal} toggle={() => setmodal(!modal)}>
         <ModalHeader toggle={() => setmodal(!modal)}>Sign Up</ModalHeader>
 
-        {error !== "" && (
-          <center>
-            <div className="w-80 m-2 alert alert-danger" role="alert">
-              {error}
-            </div>
-          </center>
-        )}
+       
         <ModalBody>
           <form>
             <div className="modal-body mx-3">
@@ -129,6 +125,8 @@ function NavLg() {
                   onChange={handleInput}
                   type="email"
                   size="lg"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  title="Enter a valid email address"
                   style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
                 />
                 <br />
@@ -190,19 +188,11 @@ function NavLg() {
       <Modal size="md" isOpen={modal2} toggle={() => setmodal2(!modal2)}>
         <ModalHeader toggle={() => setmodal2(!modal2)}>Sign In</ModalHeader>
         <ModalBody>
-          {success !== "" && (
-            <center>
-              <div
-                className="alert alert-warning alert-dismissible fade show"
-                role="alert"
-              >
-                {success}
+          
                 {/* <button onClick={gotSuccess("")}  type="button" className="close" data-dismiss="alert" aria-label="Close" >
              <span aria-hidden="true">&times;</span>
          </button> */}
-              </div>
-            </center>
-          )}
+            
 
           <div className="modal-body mx-3">
             <div className="md-form mb-2">
@@ -232,10 +222,13 @@ function NavLg() {
               <button
                 type="button"
                 onClick={signInDetails}
+               
                 className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-6 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
               >
+                 
                 Sign In
               </button>
+              
             </div>
             Don't have an account
             <button
@@ -273,7 +266,7 @@ function NavLg() {
             </li>
 
             <li className="navItem">
-              <a href="/" className="navLink text-white">
+              <a href="/about" className="navLink text-white">
                 About Us
               </a>
             </li>
@@ -299,6 +292,19 @@ function NavLg() {
           </button>
         </div>
       </div>
+      <ToastContainer
+position="top-center"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+
+/>
     </>
   );
 }

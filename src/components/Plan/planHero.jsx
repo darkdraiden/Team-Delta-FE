@@ -26,7 +26,7 @@ console.log(planData)
           />
 
           <div className="absolute z-30 left-24 top-10 flex items-center gap-10">
-            <div className="w-64 h-96">
+            <div className="w-72 h-96">
               <img
                 src={`http://127.0.0.1:8000${planData.image}`}
                 alt="Movie Poster"
@@ -38,7 +38,7 @@ console.log(planData)
             </div>
           </div>
           <img
-            src="https://www.eyeonasia.gov.sg/images/uae/dubai-profile.jpg"
+            src={`http://127.0.0.1:8000${planData.image}`}
             alt="backgrop poster"
             className="w-full h-full object-cover object-center"
           />

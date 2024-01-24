@@ -4,7 +4,8 @@ import { RiAdminFill } from "react-icons/ri";
 import { Modal, ModalBody } from "reactstrap";
 import axios from "axios";
 import { MDBInput, MDBTextArea } from "mdb-react-ui-kit";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -20,6 +21,12 @@ const AdminNavbar = ({ onAddPlan }) => {
     about: "",
     rate:"",
   });
+
+  const handleReloadWithDelay = () => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  };
 
   let name, value;
   const handleInput = (e) => {
@@ -38,9 +45,10 @@ const AdminNavbar = ({ onAddPlan }) => {
   };
 
   const closemodal1 = () => {
-    alert("Successfully added");
+    
     setmodal(false);
-    window.location.reload();
+    handleReloadWithDelay();
+    
     // Clear the form data or reset the form
     setAddPlan({
       title: "",
@@ -63,7 +71,7 @@ const AdminNavbar = ({ onAddPlan }) => {
         formData.append("image",selectedImage);
     axios
       .post("http://127.0.0.1:8000/settravelplan/", formData)
-      .then((req) => {console.log(req.data) ; closemodal1()} )
+        .then((req) => { toast.success("Plan Added Successfully") ; closemodal1()} )
       .catch((err) => console.log(err.message));
   }
   return (
@@ -137,6 +145,19 @@ const AdminNavbar = ({ onAddPlan }) => {
         </div>
       </div>
       </nav>
+      <ToastContainer
+position="top-center"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+
+/>
     </>
   );
 }
