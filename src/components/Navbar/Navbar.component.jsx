@@ -89,6 +89,7 @@ function NavLg() {
       })
       .then((req) =>{  toast.success("Logged In Successfully!"); setmodal2(false) })
       .catch((err) => console.log(err.response.data));
+
   }
 
   const openModal1 = () => {
