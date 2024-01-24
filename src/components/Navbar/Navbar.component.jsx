@@ -24,31 +24,11 @@ function NavSm() {
   );
 }
 
-function NavMd() {
-  return (
-    <>
-      <div className="flex items-center w-full gap-3">
-        <div className="w-10 h-10">
-         
-        </div>
-        <div className="w-full flex items-center gap-3 bg-white px-3 py-1 rounded-md">
-          <BiSearch />
-          <input
-            type="search"
-            className="w-full bg-transparent border-none focus:outline-none"
-            placeholder="Search for movies, events, plays, sports and activities"
-          />
-        </div>
-      </div>
-    </>
-  );
-}
-
 function NavLg() {
   const [modal, setmodal] = useState(false);
   const [modal2, setmodal2] = useState(false);
-  const[success , gotSuccess]= useState("")
-const[error , getError] = useState("")
+  const [success, gotSuccess] = useState("");
+  const [error, getError] = useState("");
 
   const [user, setuser] = useState({
     name: "",
@@ -84,22 +64,28 @@ const[error , getError] = useState("")
         phonenumber: user.phonenumber,
         password: user.password,
       })
-      .then((req) => {gotSuccess("User Created Successfuly") ;getError("") ; openModal2()})
-      .catch((err) => {getError(err.message) ;gotSuccess("")});
+      .then((req) => {
+        gotSuccess("User Created Successfuly");
+        getError("");
+        openModal2();
+      })
+      .catch((err) => {
+        getError(err.message);
+        gotSuccess("");
+      });
   }
 
   function signInDetails(e) {
     e.preventDefault();
     axios
-      .post("http://127.0.0.1:8000/signin/", { 
+      .post("http://127.0.0.1:8000/signin/", {
         email: usr.email,
         password: usr.password,
       })
-      .then((req) => alert("logged in"))
-      .catch((err) => console.log(err.message));
+      .then((req) =>{ alert("logged in") ; setmodal2(false) })
+      .catch((err) => console.log(err.response.data));
   }
 
-  
   const openModal1 = () => {
     setmodal(true);
     setmodal2(false);
@@ -109,33 +95,73 @@ const[error , getError] = useState("")
     setmodal2(true);
     setmodal(false);
   };
- 
+
   return (
     <>
       <Modal size="md" isOpen={modal} toggle={() => setmodal(!modal)}>
         <ModalHeader toggle={() => setmodal(!modal)}>Sign Up</ModalHeader>
-        
-      {error !== "" && (
-        <center>
-          <div className="w-80 m-2 alert alert-danger" role="alert">
-            {error}
-          </div>
-        </center>
-      )}
+
+        {error !== "" && (
+          <center>
+            <div className="w-80 m-2 alert alert-danger" role="alert">
+              {error}
+            </div>
+          </center>
+        )}
         <ModalBody>
           <form>
             <div className="modal-body mx-3">
               <div className="md-form mb-1">
-            <MDBInput label='Your Name' id='typeText'  name="name" onChange={handleInput} type='text' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
-            <br/>
-            <MDBInput label='Your email' id='typeemail'  name="email" onChange={handleInput} type='email' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
-            <br/>
-            <MDBInput label='Phone Number' id='typephone'  name="phonenumber" onChange={handleInput} type='tel' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
-            <br/>
-            <MDBInput label='Password' id='typepass'  name="password" onChange={handleInput} type='password' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
-           <br/>
-           <MDBInput label='Confirm Password' id='typecpassword'  name="confirm_password" onChange={handleInput} type='password' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
-              </div>    
+                <MDBInput
+                  label="Your Name"
+                  id="typeText"
+                  name="name"
+                  onChange={handleInput}
+                  type="text"
+                  size="lg"
+                  style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
+                />
+                <br />
+                <MDBInput
+                  label="Your email"
+                  id="typeemail"
+                  name="email"
+                  onChange={handleInput}
+                  type="email"
+                  size="lg"
+                  style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
+                />
+                <br />
+                <MDBInput
+                  label="Phone Number"
+                  id="typephone"
+                  name="phonenumber"
+                  onChange={handleInput}
+                  type="tel"
+                  size="lg"
+                  style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
+                />
+                <br />
+                <MDBInput
+                  label="Password"
+                  id="typepass"
+                  name="password"
+                  onChange={handleInput}
+                  type="password"
+                  size="lg"
+                  style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
+                />
+                <br />
+                <MDBInput
+                  label="Confirm Password"
+                  id="typecpassword"
+                  name="confirm_password"
+                  onChange={handleInput}
+                  type="password"
+                  size="lg"
+                  style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
+                />
+              </div>
             </div>
 
             <div>
@@ -148,7 +174,6 @@ const[error , getError] = useState("")
                   Sign Up
                 </button>
               </div>
-            
               already have an account
               <button
                 type="button"
@@ -165,23 +190,41 @@ const[error , getError] = useState("")
       <Modal size="md" isOpen={modal2} toggle={() => setmodal2(!modal2)}>
         <ModalHeader toggle={() => setmodal2(!modal2)}>Sign In</ModalHeader>
         <ModalBody>
-        {success !== "" && (
-        <center>
-          <div className="alert alert-warning alert-dismissible fade show" role="alert">
-            {success}
-             {/* <button onClick={gotSuccess("")}  type="button" className="close" data-dismiss="alert" aria-label="Close" >
+          {success !== "" && (
+            <center>
+              <div
+                className="alert alert-warning alert-dismissible fade show"
+                role="alert"
+              >
+                {success}
+                {/* <button onClick={gotSuccess("")}  type="button" className="close" data-dismiss="alert" aria-label="Close" >
              <span aria-hidden="true">&times;</span>
          </button> */}
-          </div>
-        </center>
-      )}
-      
+              </div>
+            </center>
+          )}
+
           <div className="modal-body mx-3">
             <div className="md-form mb-2">
-            <MDBInput label='Enter email' id='signintypeText'  name="email" onChange={handleInputLogin} type='email' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
-            <br/>
-            <MDBInput label='Password' id='signintypeText'  name="password" onChange={handleInputLogin} type='password' size='lg' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}/>
-            
+              <MDBInput
+                label="Enter email"
+                id="signintypeText"
+                name="email"
+                onChange={handleInputLogin}
+                type="email"
+                size="lg"
+                style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
+              />
+              <br />
+              <MDBInput
+                label="Password"
+                id="signintypeText"
+                name="password"
+                onChange={handleInputLogin}
+                type="password"
+                size="lg"
+                style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
+              />
             </div>
           </div>
           <div>
@@ -236,7 +279,7 @@ const[error , getError] = useState("")
             </li>
           </ul>
         </div>
-        <div className="flex ">
+        <div className="flex gap-2 mx-2 px-1 ">
           <div className="text-center"></div>
 
           <button
@@ -270,7 +313,7 @@ const Navbar = () => {
       </div>
       {/* Medium/Tab Screen NavBar */}
       <div className="hidden md:flex lg:hidden">
-        <NavMd />
+        <NavLg />
       </div>
       {/* Large Screen NavBar */}
       <div className="hidden md:hidden lg:flex">

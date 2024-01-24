@@ -3,6 +3,7 @@ import { Row, Col, Card, Button} from "react-bootstrap";
 import { MDBRipple } from "mdb-react-ui-kit";
 import AdminLayoutHoc from "../layout/Admin.layout";
 import axios from "axios";
+import { IoLocationOutline } from "react-icons/io5";
 
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { MDBInput, MDBTextArea } from "mdb-react-ui-kit";
@@ -95,7 +96,8 @@ const TravelPlansAdmin = () => {
               >
                 <Card.Img
                   variant="top"
-                  src="https://assets-news.housing.com/news/wp-content/uploads/2022/07/04223747/featured-compressed-1.jpg"
+                  src={`http://127.0.0.1:8000${plan.image}`}
+
                   style={{ height: "220px", width: "430px" }}
                 />
                 <a href="#!">
@@ -107,7 +109,16 @@ const TravelPlansAdmin = () => {
               </MDBRipple>
               <Card.Body>
                 <Card.Title>{plan.title}</Card.Title>
-                <Card.Text>{plan.about}</Card.Text>
+                <Card.Text>
+                    <div className='flex space-between'>
+                        <div className='flex gap-1'><IoLocationOutline /> {plan.location}</div>
+                        <div className='mr-2 font-bold'> ₹{plan.rate}</div>          
+                  </div>
+                  <hr></hr>
+                  {plan.about.length > 150
+                    ? `${plan.about.substring(0, 150)}...`
+                    : plan.about}
+                </Card.Text>
                 <div className="flex space-between">
                   <Button
                     onClick={() => handleDeletePlan(plan.travel_id, plan.title)}

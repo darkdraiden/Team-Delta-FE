@@ -11,7 +11,8 @@ function MyPlanDetails() {
 
   const styles = {
     destination: {
-      margin: '4rem 6rem',
+      margin: '3rem 6rem',
+      textAlign : "center"
     },
     heading: {
       fontSize: '3rem',
@@ -20,7 +21,7 @@ function MyPlanDetails() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginTop: '4.5rem',
+      marginTop: '2.5rem',
     },
     desText: {
       width: '45%',
@@ -56,15 +57,18 @@ function MyPlanDetails() {
   return (
     <div>
       <PlanHero planData={plan} />
-      <div style={styles.destination}>
-        <h1 style={styles.heading}>Popular Destinations</h1>
+      <div  style={styles.destination}>
+        <h1 style={styles.heading}>About {plan.title}</h1>
         <p>Tours give you the opportunity to see a lot, within a time frame.</p>
+        <hr/>
         <div style={styles.firstDes}>
+        
           <div style={styles.desText}>
-            <h2>Taal Volcano, Batangas</h2>
-            <p>
-              One of the most iconic views in Luzon, Mt. Taal boasts a volcano
-              inside a lake inside an Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam eveniet dolorum aliquid, corrupti iusto molestias officia hic ab sunt incidunt dolorem voluptates laborum repellendus adipisci iste praesentium ipsum nihil necessitatibus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis animi nemo, voluptatem accusantium rerum quis reprehenderit aperiam debitis mollitia nesciunt optio quia nobis dolorum repellendus id excepturi, consequuntur ipsa consequatur.
+          
+            <p className='text-justify'>
+            {plan.about.length > 500
+                    ? `${plan.about.substring(0, 900)}...`
+                    : plan.about}
             </p>
           </div>
           <div style={styles.image}>
@@ -82,29 +86,7 @@ function MyPlanDetails() {
         </div>
 
        <hr/>
-        <div style={styles.firstDes}>
-          <div style={styles.image}>
-            <img
-              alt="img"
-              src="https://assets.cntraveller.in/photos/63ad209f79d81704e445de5d/master/w_1600%2Cc_limit/The%2520Burj%2520Khalifa-GettyImages-1084264582.jpeg"
-              style={styles.img}
-            />
-            <img
-              alt="img"
-              src="https://us.images.westend61.de/0001589211pw/aerial-view-of-dubai-frame-an-iconic-building-in-dubai-downtown-with-city-skyline-in-background-during-a-beautiful-sunset-united-arab-emirates-AAEF11270.jpg"
-              style={styles.secondImg}
-            />
-          </div>
-          
-          <div style={styles.desText}>
-            <h2>Taal Volcano, Batangas</h2>
-            <p>
-              One of the most iconic views in Luzon, Mt. Taal boasts a volcano
-              inside a lake inside an Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam eveniet dolorum aliquid, corrupti iusto molestias officia hic ab sunt incidunt dolorem voluptates laborum repellendus adipisci iste praesentium ipsum nihil necessitatibus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis animi nemo, voluptatem accusantium rerum quis reprehenderit aperiam debitis mollitia nesciunt optio quia nobis dolorum repellendus id excepturi, consequuntur ipsa consequatur.
-            </p>
-          </div>
-         
-        </div>
+
       </div>
     </div>
   );

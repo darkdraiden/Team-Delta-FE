@@ -26,7 +26,7 @@ const PlanInfo = ({planData}) => {
             // onClick={buy plan}
             className="bg-red-500 w-full py-3 text-white font-semibold rounded-lg"
           >
-           ₹ {planData.rate}
+           Book Now
           </button>
           
         </div>

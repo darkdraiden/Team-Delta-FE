@@ -7,6 +7,7 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import axios from 'axios';
 import { MDBRipple } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
+import { IoLocationOutline } from "react-icons/io5";
 
 function Containers() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ function Containers() {
               >
                 <Card.Img
                   variant="top"
-                  src={`https://source.unsplash.com/1600x600/?${plan.title}`}
+                  src={`http://127.0.0.1:8000${plan.image}`}
                   style={{ height: '220px', width: '430px' }}
                 />
                 <a href="/">
@@ -63,7 +64,10 @@ function Containers() {
               <Card.Body>
                 <Card.Title>{plan.title} </Card.Title>
                 <Card.Text>
-                  {plan.location}
+                    <div className='flex space-between'>
+                        <div className='flex gap-1'><IoLocationOutline /> {plan.location}</div>
+                        <div className='mr-2 font-bold'> ₹{plan.rate}</div>          
+                  </div>
                   <hr></hr>
                   {plan.about.length > 150
                     ? `${plan.about.substring(0, 150)}...`
@@ -76,7 +80,7 @@ function Containers() {
                   }}
                   variant="primary"
                 >
-                  Go somewhere
+                  Explore more
                 </Button>
               </Card.Body>
             </Card>

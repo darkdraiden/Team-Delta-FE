@@ -28,7 +28,7 @@ console.log(planData)
           <div className="absolute z-30 left-24 top-10 flex items-center gap-10">
             <div className="w-64 h-96">
               <img
-                src="https://static.independent.co.uk/2023/07/04/09/iStock-1193239486.jpg?width=1200&height=1200&fit=crop"
+                src={`http://127.0.0.1:8000${planData.image}`}
                 alt="Movie Poster"
                 className="w-full h-full rounded-lg"
               />

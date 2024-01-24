@@ -11,7 +11,8 @@ import { MDBInput, MDBTextArea } from "mdb-react-ui-kit";
 
 const AdminNavbar = ({ onAddPlan }) => {
   const [modal, setmodal] = useState(false);
-  
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const [AddPlan, setAddPlan] = useState({
     title: "",
     location: "",
@@ -25,6 +26,11 @@ const AdminNavbar = ({ onAddPlan }) => {
     name = e.target.name;
     value = e.target.value;
     setAddPlan({ ...AddPlan, [name]: value  });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
   };
 
   const openModal1 = () => {
@@ -48,14 +54,15 @@ const AdminNavbar = ({ onAddPlan }) => {
 
   function AddPlanDetails(e) {
     e.preventDefault();
+    const formData=new FormData();
+    formData.append("location", AddPlan.location)
+    formData.append("title",AddPlan.title)
+        formData.append("start_date",AddPlan.start_date);
+        formData.append("about",AddPlan.about);
+        formData.append("rate",AddPlan.rate);
+        formData.append("image",selectedImage);
     axios
-      .post("http://127.0.0.1:8000/settravelplan/", {
-        location:AddPlan.location,
-        title:AddPlan.title,
-        start_date:AddPlan.start_date,
-        about:AddPlan.about,
-        rate:AddPlan.rate,
-      })
+      .post("http://127.0.0.1:8000/settravelplan/", formData)
       .then((req) => {console.log(req.data) ; closemodal1()} )
       .catch((err) => console.log(err.message));
   }
@@ -78,6 +85,8 @@ const AdminNavbar = ({ onAddPlan }) => {
             <MDBInput  label='Price' id='typeNumber' onChange={handleInput} name='rate' type='number' />
             <MDBInput  label='date' id='typeNumber' onChange={handleInput} name='start_date'type='date' />
             </div>
+            <br/>
+            <MDBInput  label='' id='typeNumber' onChange={handleFileChange} name='image' type='file' />
             <br/>
             <MDBTextArea label='about' id='textAreaExample' name='about' onChange={handleInput} rows={4} />
             </div>
