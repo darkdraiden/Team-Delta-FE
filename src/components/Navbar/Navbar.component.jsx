@@ -1,12 +1,15 @@
+'use client';
 import React, { useState } from "react";
 import { BiChevronDown, BiSearch } from "react-icons/bi";
 //import { Link } from "react-router-dom";
 import { SiYourtraveldottv } from "react-icons/si";
-import { Modal, ModalBody, ModalHeader } from "reactstrap";
+import { Dropdown, Modal, ModalBody, ModalHeader } from "reactstrap";
 import axios from "axios";
 import { MDBInput } from "mdb-react-ui-kit";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaCircleUser } from "react-icons/fa6";
+import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from 'react-icons/hi';
 
 
 
@@ -125,8 +128,7 @@ function NavLg() {
                   onChange={handleInput}
                   type="email"
                   size="lg"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                  title="Enter a valid email address"
+                  
                   style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
                 />
                 <br />
@@ -185,15 +187,9 @@ function NavLg() {
         </ModalBody>
       </Modal>
 
-      <Modal size="md" isOpen={modal2} toggle={() => setmodal2(!modal2)}>
+       <Modal size="md" isOpen={modal2} toggle={() => setmodal2(!modal2)}>
         <ModalHeader toggle={() => setmodal2(!modal2)}>Sign In</ModalHeader>
         <ModalBody>
-          
-                {/* <button onClick={gotSuccess("")}  type="button" className="close" data-dismiss="alert" aria-label="Close" >
-             <span aria-hidden="true">&times;</span>
-         </button> */}
-            
-
           <div className="modal-body mx-3">
             <div className="md-form mb-2">
               <MDBInput
@@ -240,7 +236,7 @@ function NavLg() {
             </button>
           </div>
         </ModalBody>
-      </Modal>
+      </Modal> 
 
       <div className="container flex mx-2 px-1 items-center justify-between">
         <div className="flex items-center ">
@@ -272,7 +268,7 @@ function NavLg() {
             </li>
           </ul>
         </div>
-        <div className="flex gap-2 mx-2 px-1 ">
+       <div className="flex gap-2 mx-2 px-1 ">
           <div className="text-center"></div>
 
           <button
@@ -290,7 +286,22 @@ function NavLg() {
           >
             Sign Up
           </button>
-        </div>
+        </div> 
+
+
+        
+        <div className="dropdown">
+        <div className="flex"></div>
+    <button className=" btn  btn-secondary   dropdown-toggle" style={{borderRadius: "50%"}}  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <FaCircleUser />
+    </button>
+    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="/">{usr.email}</a>
+      <a class="dropdown-item" href="/">Another action</a>
+      <a class="dropdown-item" href="/">Something else </a>
+    
+    </div>
+  </div>
       </div>
       <ToastContainer
 position="top-center"
