@@ -1,7 +1,7 @@
-import React from 'react'
-import AdminNavbar from '../components/Navbar/AdminNavbar';
+import React from "react";
+import AdminNavbar from "../components/Navbar/AdminNavbar";
 
-const AdminLayoutHoc = 
+const AdminLayoutHoc =
   (Component) =>
   ({ ...props }) => {
     return (
@@ -10,7 +10,6 @@ const AdminLayoutHoc =
         <Component {...props} />
       </div>
     );
-  }
+  };
 
-
-export default AdminLayoutHoc
+export default AdminLayoutHoc;

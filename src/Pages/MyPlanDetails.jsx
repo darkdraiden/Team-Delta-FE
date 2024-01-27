@@ -1,74 +1,68 @@
-import React from 'react';
-import { useParams , useLocation} from 'react-router-dom';
-import PlanHero from '../components/Plan/planHero';
-import DefaultLayoutHoc from '../layout/Default.layout';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import PlanHero from "../components/Plan/planHero";
+import DefaultLayoutHoc from "../layout/Default.layout";
 
 function MyPlanDetails() {
-  const { idx } = useParams();
   const { plan } = useLocation().state;
-  console.log("plan is " , plan);
-  console.log('Current idx:', idx);
 
   const styles = {
     destination: {
-      margin: '3rem 6rem',
-      textAlign : "center"
+      margin: "3rem 6rem",
+      textAlign: "center",
     },
     heading: {
-      fontSize: '3rem',
+      fontSize: "3rem",
     },
     firstDes: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginTop: '2.5rem',
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginTop: "2.5rem",
     },
     desText: {
-      width: '45%',
-      textAlign: 'start',
-      fontSize: '1.1rem',
+      width: "45%",
+      textAlign: "start",
+      fontSize: "1.1rem",
     },
     image: {
-      position: 'relative',
-      width: '50%',
-      display: 'flex',
-      justifyContent: 'space-between',
-     
+      position: "relative",
+      width: "50%",
+      display: "flex",
+      justifyContent: "space-between",
     },
     img: {
-      width: '49%',
-      height: '350px',
-      objectFit: 'cover',
-      borderRadius: '6px',
-      boxShadow: '-1px 1px 62px -18px rgba(0, 0, 0, 0.19)',
+      width: "49%",
+      height: "350px",
+      objectFit: "cover",
+      borderRadius: "6px",
+      boxShadow: "-1px 1px 62px -18px rgba(0, 0, 0, 0.19)",
     },
     secondImg: {
-        position: 'absolute',
-        top: '10%', // Adjust the top property as needed
-        right: '0',
-        width: '49%',
-        height: '350px',
-        objectFit: 'cover',
-        borderRadius: '6px',
-        boxShadow: '-1px 1px 62px -18px rgba(0, 0, 0, 0.19)',
-      },
+      position: "absolute",
+      top: "10%", // Adjust the top property as needed
+      right: "0",
+      width: "49%",
+      height: "350px",
+      objectFit: "cover",
+      borderRadius: "6px",
+      boxShadow: "-1px 1px 62px -18px rgba(0, 0, 0, 0.19)",
+    },
   };
 
   return (
     <div>
       <PlanHero planData={plan} />
-      <div  style={styles.destination}>
+      <div style={styles.destination}>
         <h1 style={styles.heading}>About {plan.title}</h1>
         <p>Tours give you the opportunity to see a lot, within a time frame.</p>
-        <hr/>
+        <hr />
         <div style={styles.firstDes}>
-        
           <div style={styles.desText}>
-          
-            <p className='text-justify'>
-            {plan.about.length > 500
-                    ? `${plan.about.substring(0, 900)}...`
-                    : plan.about}
+            <p className="text-justify">
+              {plan.about.length > 500
+                ? `${plan.about.substring(0, 900)}...`
+                : plan.about}
             </p>
           </div>
           <div style={styles.image}>
@@ -85,8 +79,7 @@ function MyPlanDetails() {
           </div>
         </div>
 
-       <hr/>
-
+        <hr />
       </div>
     </div>
   );

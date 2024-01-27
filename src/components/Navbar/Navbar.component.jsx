@@ -1,17 +1,14 @@
-'use client';
+"use client";
 import React, { useState } from "react";
 import { BiChevronDown, BiSearch } from "react-icons/bi";
-//import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
 import { SiYourtraveldottv } from "react-icons/si";
-import { Dropdown, Modal, ModalBody, ModalHeader } from "reactstrap";
+import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import axios from "axios";
 import { MDBInput } from "mdb-react-ui-kit";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaCircleUser } from "react-icons/fa6";
-import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from 'react-icons/hi';
-
-
 
 function NavSm() {
   return (
@@ -34,7 +31,6 @@ function NavSm() {
 function NavLg() {
   const [modal, setmodal] = useState(false);
   const [modal2, setmodal2] = useState(false);
-  
 
   const [user, setuser] = useState({
     name: "",
@@ -75,8 +71,7 @@ function NavLg() {
         openModal2();
       })
       .catch((err) => {
-        toast.error(err.message)
-        
+        toast.error(err.message);
       });
   }
 
@@ -87,9 +82,13 @@ function NavLg() {
         email: usr.email,
         password: usr.password,
       })
-      .then((req) =>{  toast.success("Logged In Successfully!"); setmodal2(false) })
-      .catch((err) => console.log(err.response.data));
-
+      .then((req) => {
+        const cookies = new Cookies();
+        cookies.set("sessionid", req.data.sessionid, { path: "/" });
+        toast.success("Logged In Successfully!");
+        setmodal2(false);
+      })
+      .catch((err) => toast.error(err.message));
   }
 
   const openModal1 = () => {
@@ -107,7 +106,6 @@ function NavLg() {
       <Modal size="md" isOpen={modal} toggle={() => setmodal(!modal)}>
         <ModalHeader toggle={() => setmodal(!modal)}>Sign Up</ModalHeader>
 
-       
         <ModalBody>
           <form>
             <div className="modal-body mx-3">
@@ -129,7 +127,6 @@ function NavLg() {
                   onChange={handleInput}
                   type="email"
                   size="lg"
-                  
                   style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
                 />
                 <br />
@@ -188,14 +185,17 @@ function NavLg() {
         </ModalBody>
       </Modal>
 
-       <Modal size="md" isOpen={modal2} toggle={() => setmodal2(!modal2)}>
+      <Modal size="md" isOpen={modal2} toggle={() => setmodal2(!modal2)}>
         <ModalHeader toggle={() => setmodal2(!modal2)}>Sign In</ModalHeader>
         <ModalBody>
+          {/* <button onClick={gotSuccess("")}  type="button" className="close" data-dismiss="alert" aria-label="Close" >
+             <span aria-hidden="true">&times;</span>
+         </button> */}
+
           <div className="modal-body mx-3">
             <div className="md-form mb-2">
               <MDBInput
                 label="Enter email"
-                id="signintypeText"
                 name="email"
                 onChange={handleInputLogin}
                 type="email"
@@ -205,7 +205,6 @@ function NavLg() {
               <br />
               <MDBInput
                 label="Password"
-                id="signintypeText"
                 name="password"
                 onChange={handleInputLogin}
                 type="password"
@@ -219,13 +218,10 @@ function NavLg() {
               <button
                 type="button"
                 onClick={signInDetails}
-               
                 className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-6 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
               >
-                 
                 Sign In
               </button>
-              
             </div>
             Don't have an account
             <button
@@ -237,7 +233,7 @@ function NavLg() {
             </button>
           </div>
         </ModalBody>
-      </Modal> 
+      </Modal>
 
       <div className="container flex mx-2 px-1 items-center justify-between">
         <div className="flex items-center ">
@@ -257,9 +253,15 @@ function NavLg() {
             </li>
 
             <li className="navItem">
+              {document.cookie.match('sessionid')?
               <a href="/my_plans" className="navLink text-white">
                 My Plans
               </a>
+              :
+              <a href="/my_plans" className="navLink text-white" style={{color:'#ff0000', pointerEvents:'none'}}>
+                My Plans
+              </a>
+}
             </li>
 
             <li className="navItem">
@@ -269,7 +271,31 @@ function NavLg() {
             </li>
           </ul>
         </div>
-       <div className="flex gap-2 mx-2 px-1 ">
+        
+         {document.cookie.match('sessionid')?<div className="dropdown m-0">
+          <button
+            className=" btn  btn-secondary m-0 p-0 dropdown-toggle"
+            style={{ height: "30px", borderRadius: "50%" }}
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <FaCircleUser size={35} />
+          </button>
+          <span className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/">
+              {usr.email}
+            </a>
+            <a class="dropdown-item" href="/">
+              Another action
+            </a>
+            <a class="dropdown-item" href="/">
+              Something else{" "}
+            </a>
+          </span>
+        </div>:<div className="flex gap-2 mx-2 px-1 ">
           <div className="text-center"></div>
 
           <button
@@ -287,36 +313,21 @@ function NavLg() {
           >
             Sign Up
           </button>
-        </div> 
-
-
+        </div>}
         
-        <div className="dropdown">
-        <div className="flex"></div>
-    <button className=" btn  btn-secondary   dropdown-toggle" style={{borderRadius: "50%"}}  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <FaCircleUser />
-    </button>
-    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="/">{usr.email}</a>
-      <a class="dropdown-item" href="/">Another action</a>
-      <a class="dropdown-item" href="/">Something else </a>
-    
-    </div>
-  </div>
       </div>
       <ToastContainer
-position="top-center"
-autoClose={2000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-
-/>
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

@@ -1,11 +1,10 @@
 import React from "react";
-import DefaultLayoutHoc from "../layout/Default.layout";
 import HeroCarousel from "../components/HeroCarousel/HeroCarousel";
 import Containers from "../components/Conatiners/Containers";
+import DefaultLayoutHoc from "../layout/Default.layout";
 //import axios from "axios";
 
 const HomePage = () => {
-
   /* const [cardData, setcardData] = useState([]);
 
  useEffect(() => {
@@ -25,17 +24,13 @@ const HomePage = () => {
         <h1 className="text-4xl font-bold text-gray-800 sm:ml-3 ml-0 my-3 text-center mb-3">
           Explore Travel Plans
         </h1>
-       
+
         <div className="container mx-auto px-4 md:px-12 my-8">
-        <Containers/>
+          <Containers />
         </div>
       </div>
 
-      
-
-          <div className="hidden md:flex"></div>
-        
-      
+      <div className="hidden md:flex"></div>
     </>
   );
 };

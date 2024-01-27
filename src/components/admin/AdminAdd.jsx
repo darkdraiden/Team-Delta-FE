@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
 
 const AdminAdd = () => {
   return (
-    
-       <div>
+    <div>
       <h1>Admin Panel - Travel Plans</h1>
       <div>
         <h2>Add New Plan</h2>
@@ -18,12 +17,17 @@ const AdminAdd = () => {
         </label>
         <label>
           Date:
-          <input type="date" name="date" value={newPlan.date} onChange={handleInputChange} />
+          <input
+            type="date"
+            name="date"
+            value={newPlan.date}
+            onChange={handleInputChange}
+          />
         </label>
         <button onClick={handlePostPlan}>Add Plan</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AdminAdd
+export default AdminAdd;

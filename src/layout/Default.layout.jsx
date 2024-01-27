@@ -1,6 +1,6 @@
-import React from 'react'
-import Navbar from '../components/Navbar/Navbar.component';
-import Footer from '../components/Footer/Footer.Component';
+import React from "react";
+import Navbar from "../components/Navbar/Navbar.component";
+import Footer from "../components/Footer/Footer.Component";
 
 const DefaultLayoutHoc =
   (Component) =>
@@ -10,9 +10,8 @@ const DefaultLayoutHoc =
         <Navbar />
         <Component {...props} />
         <Footer />
-
       </div>
     );
   };
 
-export default DefaultLayoutHoc
+export default DefaultLayoutHoc;

@@ -2,14 +2,14 @@ import React from "react";
 import HeroSlider from "react-slick";
 import { NextArrow, PrevArrow } from "./Arrows.Component";
 
-const images =[ 
-"https://images.pexels.com/photos/3278215/pexels-photo-3278215.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-"https://blog.wego.com/wp-content/uploads/Kalapathar-sunset-1080x675.jpg",
-"https://platinumlist.net/guide/wp-content/uploads/2022/12/bestviews-dubai-1-scaled.jpg",
-"https://content.r9cdn.net/rimg/dimg/c9/00/0d7c3411-city-58595-168c496249f.jpg?width=1366&height=768&xhint=2456&yhint=2195&crop=true",
-"https://media.tacdn.com/media/attractions-content--1x-1/11/81/ea/b9.jpg"]
+const images = [
+  "https://images.pexels.com/photos/3278215/pexels-photo-3278215.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "https://blog.wego.com/wp-content/uploads/Kalapathar-sunset-1080x675.jpg",
+  "https://platinumlist.net/guide/wp-content/uploads/2022/12/bestviews-dubai-1-scaled.jpg",
+  "https://content.r9cdn.net/rimg/dimg/c9/00/0d7c3411-city-58595-168c496249f.jpg?width=1366&height=768&xhint=2456&yhint=2195&crop=true",
+  "https://media.tacdn.com/media/attractions-content--1x-1/11/81/ea/b9.jpg",
+];
 const HeroCarousel = () => {
-  
   const settingsLG = {
     arrows: true,
     slidesToShow: 1,
@@ -49,21 +49,18 @@ const HeroCarousel = () => {
         </HeroSlider>
       </div>
       <div className="hidden lg:block ">
-      
-          <HeroSlider {...settingsLG}>
-            {images.map((image, index) => (
-              <div className="w-full h-96 px-0 py-0 mb-0" key={index}>
-                <img
-                  src={image}
-                  alt="Hero Banner"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-           
+        <HeroSlider {...settingsLG}>
+          {images.map((image, index) => (
+            <div className="w-full h-96 px-0 py-0 mb-0" key={index}>
+              <img
+                src={image}
+                alt="Hero Banner"
+                className="w-full h-full object-cover"
+              />
+            </div>
           ))}
         </HeroSlider>
-        </div>
-     
+      </div>
     </>
   );
 };
