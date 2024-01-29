@@ -6,10 +6,34 @@ import axios from "axios";
 import { MDBInput, MDBTextArea } from "mdb-react-ui-kit";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaCircleUser } from "react-icons/fa6";
+
 
 const AdminNavbar = ({ onAddPlan }) => {
   const [modal, setmodal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const[role , setrole]=useState("");
+
+  async function isAdmin() {
+    const sessionId = document.cookie.match(/sessionid=([^;]*)/);
+  
+    if (sessionId) {
+      try {
+        const res = await axios.post("http://127.0.0.1:8000/checkUser/", {
+          sessionid: sessionId[1],
+        });
+        setrole(res.data)
+      
+
+      } catch (err) {
+        document.cookie =
+          "sessionid=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        return false;
+      }
+    }
+  
+    return false;
+  }
 
   const [AddPlan, setAddPlan] = useState({
     title: "",
@@ -18,6 +42,13 @@ const AdminNavbar = ({ onAddPlan }) => {
     about: "",
     rate: "",
   });
+
+  const handleLogout = () => {
+    // Clear the session-related cookie
+    document.cookie = "sessionid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  
+    window.location.href = "/";
+  };
 
   const handleReloadWithDelay = () => {
     setTimeout(() => {
@@ -104,15 +135,7 @@ const AdminNavbar = ({ onAddPlan }) => {
                   size="lg"
                 />
                 <br />
-                <MDBInput
-                  label="Places NearBy"
-                  id="typeText"
-                  onChange={handleInput}
-                  name="places_nearby"
-                  type="text"
-                  size="lg"
-                />
-                <br />
+      
                 <div className="flex space-between gap-3">
                   <MDBInput
                     label="Price"
@@ -180,13 +203,51 @@ const AdminNavbar = ({ onAddPlan }) => {
           <div className="flex ">
             <div className="text-center"></div>
 
-            <button
-              type="button"
-              onClick={openModal1}
-              className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-6 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-            >
-              Add New PLan
-            </button>
+            {document.cookie.match("sessionid") ? (
+              <div className="dropdown m-0">
+                <button
+                  className=" btn  btn-secondary m-0 p-0 dropdown-toggle"
+                  style={{ height: "30px", borderRadius: "50%" }}
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <FaCircleUser size={35} />
+                </button>
+                <span
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <a class="dropdown-item" href="/">
+                    {localStorage.getItem("userEmail")}
+                  </a>
+                  <a class="dropdown-item" href="/">
+                    Home
+                  </a>
+
+                  {role === "ADMIN" ? (
+                    <a className="dropdown-item"  href="#" onClick={openModal1}>
+                      Add new plan
+                    </a>
+                  ) : (
+                    ""
+                  )}
+
+                  {console.log("is admin ", isAdmin())}
+                  <a class="dropdown-item" href="/" onClick={handleLogout}>
+                    logout
+                  </a>
+                </span>
+              </div>
+            ) : (
+              <div className="flex gap-2 mx-2 px-1 ">
+                <div className="text-center"></div>
+              </div>
+            )}
+
+           
           </div>
         </div>
       </nav>

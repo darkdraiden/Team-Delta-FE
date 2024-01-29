@@ -1,10 +1,34 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation} from "react-router-dom";
 import PlanHero from "../components/Plan/planHero";
 import DefaultLayoutHoc from "../layout/Default.layout";
 
+
 function MyPlanDetails() {
   const { plan } = useLocation().state;
+  
+
+  useEffect(() => {
+    // Scroll to top when the component mounts
+    window.scrollTo(0, 0);
+
+    // Scroll to top when navigating back (on POP)
+    const unlisten = () => {
+      if (window.history.state) {
+        window.scrollTo(0, 0);
+      }
+    };
+
+    // Attach scroll restoration function to the popstate event
+    window.addEventListener("popstate", unlisten);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      window.removeEventListener("popstate", unlisten);
+    };
+  }, []);
+
+
 
   const styles = {
     destination: {
@@ -68,12 +92,12 @@ function MyPlanDetails() {
           <div style={styles.image}>
             <img
               alt="img"
-              src="https://assets.cntraveller.in/photos/63ad209f79d81704e445de5d/master/w_1600%2Cc_limit/The%2520Burj%2520Khalifa-GettyImages-1084264582.jpeg"
+              src={`http://127.0.0.1:8000${plan.image}`}
               style={styles.img}
             />
             <img
               alt="img"
-              src="https://us.images.westend61.de/0001589211pw/aerial-view-of-dubai-frame-an-iconic-building-in-dubai-downtown-with-city-skyline-in-background-during-a-beautiful-sunset-united-arab-emirates-AAEF11270.jpg"
+              src={`https://source.unsplash.com/random?${plan.title}`}
               style={styles.secondImg}
             />
           </div>

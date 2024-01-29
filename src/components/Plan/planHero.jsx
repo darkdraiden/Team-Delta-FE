@@ -33,7 +33,7 @@ const planHero = ({ planData }) => {
         </div>
         <img
           src={`http://127.0.0.1:8000${planData.image}`}
-          alt="backgrop poster"
+          alt="backdrop poster"
           className="w-full h-full object-cover object-center"
         />
       </div>

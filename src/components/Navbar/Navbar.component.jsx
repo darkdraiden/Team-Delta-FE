@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { BiChevronDown, BiSearch } from "react-icons/bi";
 import Cookies from "universal-cookie";
 import { SiYourtraveldottv } from "react-icons/si";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
@@ -17,11 +16,11 @@ function NavSm() {
         <div>
           <h3 className="text-xl font-bold">It All Starts Here!</h3>
           <span className="text-gray-400 text-xs flex items-center cursor-pointer hover:text-white">
-            Delhi NCR <BiChevronDown />
+            
           </span>
         </div>
         <div className="w-8 h-8">
-          <BiSearch className="w-full h-full" />
+          
         </div>
       </div>
     </>
@@ -31,6 +30,42 @@ function NavSm() {
 function NavLg() {
   const [modal, setmodal] = useState(false);
   const [modal2, setmodal2] = useState(false);
+  const[role , setrole]=useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    const passwordMatch = usr.password === usr.confirm_password;
+  
+    if (passwordMatch) {
+      console.log('Passwords match');
+  
+    } else {
+      console.log('Passwords do not match');
+  
+    }
+  };
+
+  async function isAdmin() {
+    const sessionId = document.cookie.match(/sessionid=([^;]*)/);
+  
+    if (sessionId) {
+      try {
+        const res = await axios.post("http://127.0.0.1:8000/checkUser/", {
+          sessionid: sessionId[1],
+        });
+        setrole(res.data)
+      
+
+      } catch (err) {
+        document.cookie =
+          "sessionid=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        return false;
+      }
+    }
+  
+    return false;
+  }
 
   const [user, setuser] = useState({
     name: "",
@@ -55,6 +90,9 @@ function NavLg() {
     name = e.target.name;
     value = e.target.value;
     setusr({ ...usr, [name]: value });
+    if (name === 'email') {
+      localStorage.setItem('userEmail', value);
+    }
   };
 
   function signUpDetails(e) {
@@ -91,6 +129,13 @@ function NavLg() {
       .catch((err) => toast.error(err.message));
   }
 
+  const handleLogout = () => {
+    // Clear the session-related cookie
+    document.cookie = "sessionid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  
+    window.location.href = "/";
+  };
+
   const openModal1 = () => {
     setmodal(true);
     setmodal2(false);
@@ -107,7 +152,7 @@ function NavLg() {
         <ModalHeader toggle={() => setmodal(!modal)}>Sign Up</ModalHeader>
 
         <ModalBody>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="modal-body mx-3">
               <div className="md-form mb-1">
                 <MDBInput
@@ -174,7 +219,8 @@ function NavLg() {
               </div>
               already have an account
               <button
-                type="button"
+              type="submit"
+                
                 onClick={openModal2}
                 className="text-black underline focus:outline-none   font-medium  text-sm px-6 py-2.5 text-center me-2 mb-2 "
               >
@@ -286,16 +332,30 @@ function NavLg() {
           </button>
           <span className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="/">
-              {usr.email}
+            {localStorage.getItem('userEmail')}
             </a>
             <a class="dropdown-item" href="/">
-              Another action
+              Home
             </a>
-            <a class="dropdown-item" href="/">
-              Something else{" "}
+
+            {role==="ADMIN" ? (
+  <a className="dropdown-item" href="/admin">
+    Admin
+  </a>
+) : (
+  ""
+)}
+
+
+            {console.log("is admin ", isAdmin())}
+            <a class="dropdown-item" href="/" onClick={handleLogout} >
+              logout
             </a>
+
+            
           </span>
-        </div>:<div className="flex gap-2 mx-2 px-1 ">
+        </div>
+        :<div className="flex gap-2 mx-2 px-1 ">
           <div className="text-center"></div>
 
           <button

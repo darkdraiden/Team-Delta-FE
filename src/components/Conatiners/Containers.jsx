@@ -79,11 +79,15 @@ function Containers() {
                   </div>
                 </Card.Text>
                 <hr />
+                
                 {plan.about.length > 150
                   ? `${plan.about.substring(0, 150)}...`
                   : plan.about}
+                  <div className="mt-2"></div>
                 <Button
+                 className="flex justift-start"
                   onClick={() => {
+                   
                     routeChange(idx, plan);
                     // Fetch data for the selected plan
                   }}
@@ -91,6 +95,7 @@ function Containers() {
                 >
                   Explore more
                 </Button>
+               
               </Card.Body>
             </Card>
           </Col>

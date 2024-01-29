@@ -2,12 +2,22 @@ import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { MDBInput } from "mdb-react-ui-kit";
 // import PaymentModel from "../PaymentModal/Payment.Component";
 // import { MovieContext } from "../../context/Movie.context";
 
 const PlanInfo = ({ planData }) => {
   const [price, setprice] = useState(planData.rate);
   const [modal2, setmodal2] = useState(false);
+  const[AddDate , setAddDate] = useState(null);
+
+  
+
+  const handleInput = (e) => {
+   
+    setAddDate(e.target.value);
+  }; 
+
   const buy_plan = () => {
     const sessionId = document.cookie.match(/sessionid=([^;]*)/);
     axios
@@ -15,6 +25,7 @@ const PlanInfo = ({ planData }) => {
         booking_price: price,
         travel: planData.travel_id,
         member_count: price / planData.rate,
+        booking_date: AddDate,
         sessionid: sessionId[1],
       })
       .then((req) => {
@@ -33,17 +44,25 @@ const PlanInfo = ({ planData }) => {
   };
   return (
     <>
+    
       <Modal size="md" isOpen={modal2} toggle={() => setmodal2(!modal2)}>
         <ModalHeader toggle={() => setmodal2(!modal2)}>Book Ticket</ModalHeader>
         <ModalBody>
-          {/* <button onClick={gotSuccess("")}  type="button" className="close" data-dismiss="alert" aria-label="Close" >
-             <span aria-hidden="true">&times;</span>
-         </button> */}
+         
           <center>
             Sure want to book this plan for{" "}
             <b>{price / planData.rate} members</b>?
           </center>
-
+          <div className="flex mx-5 mt-4 ">
+          <MDBInput
+                   
+                    label="booking_date"
+                    id="typeNumber"
+                    onChange={handleInput}
+                    name="booking_date"
+                    type="date"
+                  />
+       </div>
           <div className="my-5 d-flex justify-content-center">
             <button
               type="button"
@@ -63,6 +82,8 @@ const PlanInfo = ({ planData }) => {
           </div>
         </ModalBody>
       </Modal>
+      
+      
       {/* <PaymentModel setIsOpen={setIsOpen} isOpen={isOpen} price={price} /> */}
       <div className="flex flex-col gap-8">
         <h1 className="text-white text-5xl font-bold">{planData.title}</h1>
@@ -94,7 +115,7 @@ const PlanInfo = ({ planData }) => {
           </div>
         </div>
       </div>
-    </>
+   </>
   );
 };
 

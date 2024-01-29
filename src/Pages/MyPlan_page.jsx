@@ -9,6 +9,7 @@ import axios from "axios";
 import { MDBRipple } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const MyPlanPage = () => {
   const [data, newData] = useState([]);
@@ -17,10 +18,37 @@ const MyPlanPage = () => {
       console.log("Navigating to:", `/my_plan/${idx}`);
       navigate(`/my_plan/${idx}`, { state: { plan: plan } });
     };
+
+    const handleReloadWithDelay = () => {
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    };
+    
+    const cancelBooking = (booking_id) => {
+      const sessionId = document.cookie.match(/sessionid=([^;]*)/);
+    
+      axios
+        .delete(`http://127.0.0.1:8000/deletebooking/${booking_id}`, {
+          data: {
+            sessionid: sessionId[1],
+          },
+        })
+        .then((req) => {
+          toast.success("Booking canceled successfully");
+          handleReloadWithDelay();
+         
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
+    };
+    
   
 
   useEffect(() => {
     const sessionId = document.cookie.match(/sessionid=([^;]*)/);
+
 
   if (sessionId) {
     axios
@@ -116,6 +144,7 @@ const MyPlanPage = () => {
                 {plan.about.length > 150
                   ? `${plan.about.substring(0, 150)}...`
                   : plan.about}
+                  <div className="mt-2 flex justify-between ">
                 <Button
                   onClick={() => {
                     routeChange(idx, plan);
@@ -123,8 +152,16 @@ const MyPlanPage = () => {
                   }}
                   variant="primary"
                 >
-                  Explore more
+                  know more
                 </Button>
+
+                <Button
+                  onClick={ ()=> cancelBooking(plan.booking_id)}
+                  variant="primary"
+                >
+                  Unregistered
+                </Button>
+                </div>
               </Card.Body>
             </Card>
           </Col>
