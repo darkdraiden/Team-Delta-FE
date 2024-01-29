@@ -162,8 +162,10 @@ function NavLg() {
                   onChange={handleInput}
                   type="text"
                   size="lg"
+                  required
                   style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
                 />
+
                 <br />
                 <MDBInput
                   label="Your email"
@@ -205,12 +207,14 @@ function NavLg() {
                   style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
                 />
               </div>
+              
             </div>
 
             <div>
               <div className="modal-footer d-flex justify-content-center">
                 <button
-                  type="button"
+              type="submit"
+
                   onClick={signUpDetails}
                   className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-6 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                 >
@@ -226,6 +230,7 @@ function NavLg() {
               >
                 sign In
               </button>
+              
             </div>
           </form>
         </ModalBody>

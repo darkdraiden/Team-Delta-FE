@@ -208,6 +208,7 @@ setmodal2(true)
                     <div className="mr-2 font-bold"> ₹{plan.rate}</div>
                   </div>
                   <hr></hr>
+
                   {plan.about.length > 150
                     ? `${plan.about.substring(0, 150)}...`
                     : plan.about}
@@ -219,6 +220,8 @@ setmodal2(true)
                   >
                     Delete
                   </Button>
+                  total registered : {plan.total_count}
+                  <br></br>
                   <Button onClick={() => handleEditPlan(plan)}>Edit</Button>
                 </div>
               </Card.Body>

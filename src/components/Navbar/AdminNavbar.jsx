@@ -143,6 +143,7 @@ const AdminNavbar = ({ onAddPlan }) => {
                     onChange={handleInput}
                     name="rate"
                     type="number"
+                    pattern="[0-9]"
                   />
                   <MDBInput
                     label="date"
