@@ -44,8 +44,20 @@ function MyPlanDetails() {
       justifyContent: "space-between",
       marginTop: "2.5rem",
     },
+    firstDes1: {
+      display: "flex ",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginTop: "2.5rem",
+    },
     desText: {
       width: "45%",
+      textAlign: "start",
+      fontSize: "1.1rem",
+    },
+    desText1: {
+      width: "85%",
       textAlign: "start",
       fontSize: "1.1rem",
     },
@@ -53,6 +65,13 @@ function MyPlanDetails() {
       position: "relative",
       width: "50%",
       display: "flex",
+      justifyContent: "space-between",
+    },
+    image1: {
+      position: "relative",
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
       justifyContent: "space-between",
     },
     img: {
@@ -81,6 +100,7 @@ function MyPlanDetails() {
         <h1 style={styles.heading}>About {plan.title}</h1>
         <p>Tours give you the opportunity to see a lot, within a time frame.</p>
         <hr />
+        <div className="relative lg:block md:block hidden w-full">
         <div style={styles.firstDes}>
           <div style={styles.desText}>
             <p className="text-justify">
@@ -101,6 +121,36 @@ function MyPlanDetails() {
               style={styles.secondImg}
             />
           </div>
+        </div>
+
+
+
+
+        </div>
+
+        <div className="relative block lg:hidden md:hidden">
+        <div style={styles.firstDes1}>
+          <div style={styles.desText1}>
+            <p className="text-justify">
+              {plan.about.length > 500
+                ? `${plan.about.substring(0, 500)}...`
+                : plan.about}
+            </p>
+          </div>
+          <div style={styles.image1}>
+            <img
+              alt="img"
+              src={`http://127.0.0.1:8000${plan.image}`}
+              style={styles.img}
+            />
+            <img
+              alt="img"
+              src={`https://source.unsplash.com/random?${plan.title}`}
+              style={styles.secondImg}
+            />
+          </div>
+        </div>
+
         </div>
 
         <hr />
