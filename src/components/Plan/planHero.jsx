@@ -24,7 +24,7 @@ const planHero = ({ planData }) => {
             <img
               src={`http://127.0.0.1:8000${planData.image}`}
               alt="Movie Poster"
-              className="w-full h-full rounded-lg"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
           <div>
@@ -38,7 +38,7 @@ const planHero = ({ planData }) => {
         />
       </div>
       <div
-        className="relative block lg:hidden md:hidden"
+        className="relative block lg:hidden md:hidden center"
         style={{ height: "39rem" }}
       >
         <div
@@ -49,24 +49,29 @@ const planHero = ({ planData }) => {
           }}
         />
 
-        <div className="absolute z-30 left-24 top-10 flex flex-col items-center gap-10">
+<center>
+        <div className="absolute z-30 transform -translate-x-1/2 -translate-y-1/2  top-1/2 left-1/2 flex flex-col items-center gap-10">
+          
           <div className="flex w-48 h-60 items-center">
             <img
               src={`http://127.0.0.1:8000${planData.image}`}
               alt="Movie Poster"
-              className="w-full h-full rounded-lg"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
           <div>
             <PlanInfo planData={planData} />
           </div>
         </div>
+        </center>
         <img
           src={`http://127.0.0.1:8000${planData.image}`}
           alt="backdrop poster"
           className="w-full h-full object-cover object-center"
         />
       </div>
+      
+
     </>
   );
 };

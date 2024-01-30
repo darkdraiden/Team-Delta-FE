@@ -35,6 +35,10 @@ function MyPlanDetails() {
       margin: "3rem 6rem",
       textAlign: "center",
     },
+    destination1: {
+      margin: "3rem 3rem",
+      textAlign: "center",
+    },
     heading: {
       fontSize: "3rem",
     },
@@ -96,11 +100,12 @@ function MyPlanDetails() {
   return (
     <div>
       <PlanHero planData={plan} />
+      <div className="relative lg:block md:block hidden w-full">
       <div style={styles.destination}>
         <h1 style={styles.heading}>About {plan.title}</h1>
         <p>Tours give you the opportunity to see a lot, within a time frame.</p>
         <hr />
-        <div className="relative lg:block md:block hidden w-full">
+       
         <div style={styles.firstDes}>
           <div style={styles.desText}>
             <p className="text-justify">
@@ -122,13 +127,14 @@ function MyPlanDetails() {
             />
           </div>
         </div>
-
-
-
-
+        </div>
         </div>
 
         <div className="relative block lg:hidden md:hidden">
+        <div style={styles.destination1}>
+        <h1 style={styles.heading}>About {plan.title}</h1>
+        <p>Tours give you the opportunity to see a lot, within a time frame.</p>
+        <hr />
         <div style={styles.firstDes1}>
           <div style={styles.desText1}>
             <p className="text-justify">
@@ -156,6 +162,7 @@ function MyPlanDetails() {
         <hr />
       </div>
     </div>
+   
   );
 }
 
