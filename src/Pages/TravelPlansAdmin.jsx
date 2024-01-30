@@ -164,13 +164,15 @@ setmodal2(true)
                 Sign In
               </button>
             </div>
+            <center>
             Don't have an account
             <button
               type="button"
-              className="text-black underline focus:outline-none mu-1  font-medium  text-sm px-6 py-2.5 text-center me-2 mb-2 "
+              className="text-black underline focus:outline-none mu-1  font-medium  text-sm px-2 py-2.5 text-center me-1 mb-1 "
             >
               Sign Up
             </button>
+            </center>
           </div>
         </ModalBody>
       </Modal>
@@ -199,7 +201,13 @@ setmodal2(true)
                 </a>
               </MDBRipple>
               <Card.Body>
-                <Card.Title>{plan.title}</Card.Title>
+                <Card.Title>
+                <div className="flex space-between">
+                    <div className="flex gap-1">
+                     {plan.title}
+                    </div>
+                    <div className="mr-2 " style={{ fontSize: '15px' }} > {plan.start_date}</div>
+                  </div> </Card.Title>
                 <Card.Text>
                   <div className="flex space-between">
                     <div className="flex gap-1">

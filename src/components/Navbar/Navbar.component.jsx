@@ -13,6 +13,11 @@ function NavSm() {
   const [modal, setmodal] = useState(false);
   const [modal2, setmodal2] = useState(false);
   const[role , setrole]=useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -170,24 +175,25 @@ function NavSm() {
                 />
                 <br />
                 <MDBInput
-                  label="Password"
-                  id="typepass"
-                  name="password"
-                  onChange={handleInput}
-                  type="password"
-                  size="lg"
-                  style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
-                />
-                <br />
-                <MDBInput
-                  label="Confirm Password"
-                  id="typecpassword"
-                  name="confirm_password"
-                  onChange={handleInput}
-                  type="password"
-                  size="lg"
-                  style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
-                />
+        label="Password"
+        id="typepass"
+        name="password"
+        onChange={(e) => handleInput(e)}
+        type={passwordVisible ? 'text' : 'password'}
+        size="lg"
+        style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}
+      />
+      
+      <label>
+      
+        <input
+        className="mt-3 ml-1"
+          type="checkbox"
+          checked={passwordVisible}
+          onChange={handleCheckboxChange}
+        />
+        &nbsp; Show Password
+      </label>
               </div>
               
             </div>
@@ -203,16 +209,17 @@ function NavSm() {
                   Sign Up
                 </button>
               </div>
+              <center>
               already have an account
               <button
               type="submit"
                 
                 onClick={openModal2}
-                className="text-black underline focus:outline-none   font-medium  text-sm px-6 py-2.5 text-center me-2 mb-2 "
+                className="text-black underline focus:outline-none   font-medium  text-sm px-2 py-2.5 text-center me-1 mb-1 "
               >
                 sign In
               </button>
-              
+              </center>
             </div>
           </form>
         </ModalBody>
@@ -256,14 +263,16 @@ function NavSm() {
                 Sign In
               </button>
             </div>
+            <center>
             Don't have an account
             <button
               type="button"
               onClick={openModal1}
-              className="text-black underline focus:outline-none mu-1  font-small  text-sm px-6 py-2.5 text-center me-2 mb-2 "
+              className="text-black underline focus:outline-none mu-1  font-small  text-sm px-2 py-2.5 text-center me-1 mb-1 "
             >
               Sign Up
             </button>
+            </center>
           </div>
         </ModalBody>
       </Modal>
@@ -334,6 +343,7 @@ function NavSm() {
           >
             Sign Up
           </button>
+         
         </div>}
         
       </div>
@@ -357,6 +367,11 @@ function NavLg() {
   const [modal, setmodal] = useState(false);
   const [modal2, setmodal2] = useState(false);
   const[role , setrole]=useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -514,24 +529,26 @@ function NavLg() {
                 />
                 <br />
                 <MDBInput
-                  label="Password"
-                  id="typepass"
-                  name="password"
-                  onChange={handleInput}
-                  type="password"
-                  size="lg"
-                  style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
-                />
-                <br />
-                <MDBInput
-                  label="Confirm Password"
-                  id="typecpassword"
-                  name="confirm_password"
-                  onChange={handleInput}
-                  type="password"
-                  size="lg"
-                  style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
-                />
+        label="Password"
+        id="typepass"
+        name="password"
+        onChange={(e) => handleInput(e)}
+        type={passwordVisible ? 'text' : 'password'}
+        size="lg"
+        style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}
+      />
+      
+      <label>
+      
+        <input
+        className="mt-3 ml-1"
+          type="checkbox"
+          checked={passwordVisible}
+          onChange={handleCheckboxChange}
+        />
+        &nbsp; Show Password
+      </label>
+                
               </div>
               
             </div>
@@ -547,16 +564,17 @@ function NavLg() {
                   Sign Up
                 </button>
               </div>
-              already have an account
+                 <center>
+                  already have an account
               <button
               type="submit"
                 
                 onClick={openModal2}
-                className="text-black underline focus:outline-none   font-medium  text-sm px-6 py-2.5 text-center me-2 mb-2 "
+                className="text-black underline focus:outline-none   font-medium  text-sm px-2 py-1.5 text-center me-1 mb-1 "
               >
-                sign In
+                Sign In
               </button>
-              
+              </center>
             </div>
           </form>
         </ModalBody>
@@ -600,14 +618,16 @@ function NavLg() {
                 Sign In
               </button>
             </div>
+            <center>
             Don't have an account
             <button
               type="button"
               onClick={openModal1}
-              className="text-black underline focus:outline-none mu-1  font-medium  text-sm px-6 py-2.5 text-center me-2 mb-2 "
+              className="text-black underline focus:outline-none mu-1  font-medium  text-sm px-2 py-2.5 text-center me- mb-1"
             >
               Sign Up
             </button>
+            </center>
           </div>
         </ModalBody>
       </Modal>
@@ -636,7 +656,7 @@ function NavLg() {
               </a>
               :
               <a href="/my_plans" className="navLink text-white" style={{color:'#ff0000', pointerEvents:'none'}}>
-                My Plans
+                
               </a>
 }
             </li>

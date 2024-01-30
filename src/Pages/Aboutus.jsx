@@ -21,7 +21,8 @@ const Aboutus = () => {
           </Col>
 
           {/* Content Next to Photo */}
-          <Col xs={12} md={8}>
+
+          <Col className="mt-3" xs={12} md={8}>
             <h4> Priyanshi jain</h4>
             <h5>ISE-1</h5>
             <p>
@@ -38,7 +39,7 @@ const Aboutus = () => {
       <div className="mx-20 my-7">
         <Row className="align-items-center">
           <hr className="mb-0" />
-          <Col xs={12} md={8}>
+          <Col className="mt-3 center" xs={12} md={8}>
             <h4> Yashraj Singh Chauhan</h4>
             <h5>ISE-1</h5>
             <p>
@@ -64,7 +65,7 @@ const Aboutus = () => {
       <div className="mx-20 my-7">
         <Row className="align-items-center">
           <hr className="mb-0" />
-          <Col xs={12} md={4} className="text-center">
+          <Col  xs={12} md={4} className="text-center  ">
             <Image
               src={imgSrc2}
               alt="Circular Photo"
@@ -72,7 +73,7 @@ const Aboutus = () => {
               style={{ width: "250px", height: "250px" }}
             />
           </Col>
-          <Col xs={12} md={8}>
+          <Col className="mt-3" xs={12} md={8}>
             <h4> Vivek Kumar</h4>
             <h5>SDE-1</h5>
             <p>
