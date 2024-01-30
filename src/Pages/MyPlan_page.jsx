@@ -137,7 +137,7 @@ const MyPlanPage = () => {
                     <div className="flex gap-1">
                       <IoLocationOutline /> {plan.location}
                     </div>
-                    <div className="mr-2 font-bold"> ₹{plan.rate}</div>
+                    <div className="mr-2 font-bold"> ₹{plan.rate} x {plan.member_count}</div>
                   </div>
                 </Card.Text>
                 <hr />

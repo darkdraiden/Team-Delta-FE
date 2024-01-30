@@ -310,7 +310,7 @@ function NavSm() {
 
             {console.log("is admin ", isAdmin())}
             <a class="dropdown-item" href="/" onClick={handleLogout} >
-              logout
+              Logout
             </a>
 
             
@@ -650,8 +650,9 @@ function NavLg() {
         </div>
         
          {document.cookie.match('sessionid')?<div className="dropdown m-0">
+          
           <button
-            className=" btn  btn-secondary m-0 p-0 dropdown-toggle"
+            className=" btn  btn-secondary m-0 p-0 dropdown-toggle-center"
             style={{ height: "30px", borderRadius: "50%" }}
             type="button"
             id="dropdownMenuButton"
@@ -661,26 +662,25 @@ function NavLg() {
           >
             <FaCircleUser size={35} />
           </button>
-          <span className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/">
+          <span className="dropdown-menu border center" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item border mt-0" href="/">
             {localStorage.getItem('userEmail')}
             </a>
-            <a class="dropdown-item" href="/">
+            <a class="dropdown-item border  text-md" href="/">
               Home
             </a>
 
             {role==="ADMIN" ? (
-  <a className="dropdown-item" href="/admin">
+  <a className="dropdown-item border" href="/admin">
     Admin
   </a>
 ) : (
   ""
 )}
 
-
             {console.log("is admin ", isAdmin())}
-            <a class="dropdown-item" href="/" onClick={handleLogout} >
-              logout
+            <a class="dropdown-item border" href="/" onClick={handleLogout} >
+              Logout
             </a>
 
             
@@ -726,7 +726,7 @@ function NavLg() {
 // Main Component
 const Navbar = () => {
   return (
-    <nav className="bg-darkBackground-700 px-3 py-2.5">
+    <nav className="bg-darkBackground-700 px-3 py-2.5 w-100%">
       {/* Mobile Screen NavBar */}
       <div className="md:hidden">
         <NavSm />

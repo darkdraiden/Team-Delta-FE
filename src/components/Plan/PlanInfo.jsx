@@ -1,17 +1,21 @@
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import React, { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { MDBInput } from "mdb-react-ui-kit";
-// import PaymentModel from "../PaymentModal/Payment.Component";
-// import { MovieContext } from "../../context/Movie.context";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 const PlanInfo = ({ planData }) => {
   const [price, setprice] = useState(planData.rate);
   const [modal2, setmodal2] = useState(false);
   const[AddDate , setAddDate] = useState(null);
 
-  
+  const toastmsg =() =>
+  {
+    toast.error("Login Required");
+  };
 
   const handleInput = (e) => {
    
@@ -84,7 +88,6 @@ const PlanInfo = ({ planData }) => {
       </Modal>
       
       
-      {/* <PaymentModel setIsOpen={setIsOpen} isOpen={isOpen} price={price} /> */}
       <div className="flex flex-col gap-8">
         <h1 className="text-white text-5xl font-bold">{planData.title}</h1>
         <div className="flex  flex-col gap-2 text-white">
@@ -93,28 +96,51 @@ const PlanInfo = ({ planData }) => {
           <h6>{planData.start_date}</h6>
         </div>
         <div className="flex items-center gap-3 w-full">
-          <div className="bg-red-500 d-flex rounded-lg text-white w-full">
-            <button
-              onClick={minus}
-              className="bg-red-500 font-semibold m-1 p-3 w-full"
-            >
-              -
-            </button>
-            <button
-              onClick={() => setmodal2(true)}
-              className="bg-red-500 w-full font-semibold m-1 p-3 "
-            >
-              {price}
-            </button>
-            <button
-              onClick={plus}
-              className="bg-red-500 w-full font-semibold m-1 p-3 "
-            >
-              +
-            </button>
-          </div>
+        {document.cookie.match('sessionid')?
+              <div className="bg-red-500 d-flex rounded-lg text-white w-full">
+              <button
+                onClick={minus}
+                className="bg-red-500 font-semibold m-1 p-3 w-full"
+              >
+                -
+              </button>
+              <button
+                onClick={() => setmodal2(true)}
+                className="bg-red-500 w-full font-semibold m-1 p-3 "
+              >
+                {price}
+              </button>
+              <button
+                onClick={plus}
+                className="bg-red-500 w-full font-semibold m-1 p-3 "
+              >
+                +
+              </button>
+            </div>
+              :
+              <button
+                 onClick = {()=> toastmsg()}
+                className="bg-red-500 w-full text-white font-semibold m-1 p-3 rounded-lg "
+              >
+                Book
+              </button>
+             
+}
+          
         </div>
       </div>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        draggable
+        pauseOnHover
+        theme="light"
+      />
    </>
   );
 };
